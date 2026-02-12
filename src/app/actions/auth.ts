@@ -67,7 +67,7 @@ export async function signUpAction(formData: FormData) {
       return {
         success: false,
         message: 'Validation error',
-        errors: error.errors,
+        errors: error.issues,
       };
     }
 

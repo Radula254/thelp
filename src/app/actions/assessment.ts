@@ -91,7 +91,7 @@ export async function submitAssessment(formData: FormData) {
       return {
         success: false,
         message: 'Validation error',
-        errors: error.errors,
+        errors: error.issues,
       };
     }
 

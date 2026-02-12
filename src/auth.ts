@@ -1,22 +1,15 @@
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import { MongoDBAdapter } from '@auth/mongodb-adapter';
-import { MongoClient } from 'mongodb';
 import bcrypt from 'bcryptjs';
 import connectDB from '@/lib/mongodb';
 import User from '@/lib/models/User';
 
-const client = new MongoClient(process.env.MONGODB_URI!);
-const clientPromise = client.connect();
-
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  adapter: MongoDBAdapter(clientPromise),
   session: {
     strategy: 'jwt',
   },
   pages: {
     signIn: '/login',
-    signUp: '/signup',
   },
   providers: [
     Credentials({
