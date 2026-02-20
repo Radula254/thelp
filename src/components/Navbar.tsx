@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
@@ -26,16 +27,18 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-200">
       <nav className="container mx-auto flex items-center justify-between py-4 px-4 md:px-8">
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex items-center gap-1">
-            <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center">
-              <span className="text-white font-bold text-sm">T</span>
-            </div>
-            <span className="text-xl font-bold text-gray-900">THLEP</span>
-          </div>
+          <Image
+            src="/thlep-logo.png"
+            alt="THLEP Foundation Logo"
+            width={120}
+            height={40}
+            className="h-10 w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -61,17 +64,24 @@ export default function Navbar() {
               </form>
             </>
           ) : (
-            <Link href="/signup" className="ml-2">
-              <Button size="sm" variant="default">
-                Join Our Mission
-              </Button>
-            </Link>
+            <div className="flex items-center gap-2 ml-2">
+              <Link href="/login">
+                <Button size="sm" variant="outline">
+                  Sign In
+                </Button>
+              </Link>
+              <Link href="/signup">
+                <Button size="sm" variant="default">
+                  Join Us
+                </Button>
+              </Link>
+            </div>
           )}
         </div>
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden p-2 text-gray-900"
+          className="lg:hidden p-2 text-gray-900"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -81,7 +91,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t border-gray-200 bg-white px-4 pb-4">
+        <div className="lg:hidden border-t border-gray-200 bg-white px-4 pb-4">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -108,11 +118,14 @@ export default function Navbar() {
               </form>
             </>
           ) : (
-            <Link href="/signup" onClick={() => setOpen(false)} className="mt-2 block">
-              <Button size="sm" variant="default" className="w-full">
-                Join Our Mission
-              </Button>
-            </Link>
+            <div className="flex gap-2 mt-2">
+              <Link href="/login" onClick={() => setOpen(false)} className="flex-1">
+                <Button size="sm" variant="outline" className="w-full">Sign In</Button>
+              </Link>
+              <Link href="/signup" onClick={() => setOpen(false)} className="flex-1">
+                <Button size="sm" variant="default" className="w-full">Join Us</Button>
+              </Link>
+            </div>
           )}
         </div>
       )}

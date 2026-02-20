@@ -18,6 +18,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "THLEP - Talking Hands, Listening Eyes Foundation",
   description: "Connecting the hearing and the Deaf world by promoting maternal and mental health of Deaf mothers globally",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
